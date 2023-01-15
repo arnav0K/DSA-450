@@ -1,0 +1,7 @@
+int func(Node* root){ 
+if(!root) return 0;
+int l =func(root->left);
+int r =func(root->right);
+ans=max(ans,l+r+root->data);
+return l+r+root->data;
+}
