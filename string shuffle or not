@@ -1,0 +1,25 @@
+void solve(){
+string s1, s2;
+cin>>s1>>s2;
+string res;
+cin>>res;
+int 11 s1.length();
+int 12 s2.length();
+int 1r res.length();
+if((11+12) != 1r) cout<<"No";
+else{
+int f=8;
+int i=0,j=0,k=0;
+while(k<lr){
+if(i<11 and sl[i]==res[k]) i++;
+else if(j<12 and s2[j]==res[k]) j++;
+else {
+f=1;
+break;
+}
+k++;
+}
+if(i<11 or j<12) cout<<"no";
+else cout<<"yes";
+}
+}
