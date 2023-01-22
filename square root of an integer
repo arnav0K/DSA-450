@@ -1,0 +1,46 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+
+// } Driver Code Ends
+class Solution {
+  public:
+    int countSquares(int N) {
+        int s=0;
+        int e=N;
+        int mid=s+(e-s)/2;
+         int ans=-1;
+         while(s<=e){
+             int square=mid*mid;
+             if(square==N){
+                 return mid;
+             }
+             if(square<N){
+                 ans=mid;
+                 s=mid+1;
+             }
+             else{
+                 e=mid-1;
+                 
+             }
+             mid=s+(e-s)/2;
+         }
+         return ans;
+    }
+};
+
+//{ Driver Code Starts.
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int N;
+        
+        cin>>N;
+
+        Solution ob;
+        cout << ob.countSquares(N) << endl;
+    }
+    return 0;
+}
+// } Driver Code Ends
