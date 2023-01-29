@@ -1,0 +1,22 @@
+bool final=true;
+    int solve(Node*root){
+        if(root==NULL) return 0;
+        if(root->left==NULL && root->right==NULL){
+            return root->data;
+        }
+        int l=solve(root->left);
+        int r=solve(root->right);
+        
+        if(root->data!=(l+r)){
+            final=false;
+        }
+        return l+r+root->data;
+    }
+    bool isSumTree(Node* root)
+    {
+         // Your code here
+         final=true;
+         solve(root);
+         return final;
+    }
+};
