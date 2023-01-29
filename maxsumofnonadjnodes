@@ -1,0 +1,34 @@
+
+class Solution{
+  public:
+  unordered_map<Node*,int> v;
+    int solver(Node* root){
+        if(root==NULL) 
+        return 0;
+        
+        if(v.find(root)!=v.end())
+         return v[root];
+        int sum=root->data;
+
+       if(root->left!=NULL){ 
+         sum+=solver(root->left->left)+solver(root->left->right);
+        }
+
+        if(root->right!=NULL){
+          sum+=solver(root->right->right)+solver(root->right->left);
+        }
+
+        int p=0;
+        if(root->left) 
+        p+=solver(root->left);
+        
+        if(root->right)
+        p+=solver(root->right);
+        
+        return v[root]=max(sum,p);
+    }
+
+    int getMaxSum(Node *root){
+        return solver(root);
+    }
+};
