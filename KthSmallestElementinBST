@@ -1,0 +1,19 @@
+class Solution {
+  public:
+   
+
+     void solve(Node* root, int& k, int& ans){
+        if(!root) return;
+        solve(root->left,k,ans);
+        if(k==1 && ans == -1){
+            ans = root->data;
+        }else k--;
+        if(ans == -1) solve(root->right,k,ans);
+    }
+    int KthSmallestElement(Node *root, int K) {
+        // add code here.
+        int ans = -1;
+        solve(root,K,ans);
+        return ans;
+    }
+};
