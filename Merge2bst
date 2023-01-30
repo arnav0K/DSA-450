@@ -1,0 +1,59 @@
+class Solution
+{
+    public:
+    void inorder(Node *root,vector<int> &ans)
+    {
+        if(root==NULL)
+        return ;
+        
+        inorder(root->left,ans);
+        ans.push_back(root->data);
+        inorder(root->right,ans);
+
+    }
+    
+vector<int> inOrderMerge(vector<int> arr1,vector<int> arr2)
+{   int Index1=arr1.size();
+    int Index2=arr2.size();
+    int mainIndex=0;
+    int i=0,j=0;
+    
+    vector<int> arr3(Index1+Index2);
+    while(i<Index1 && j<Index2)
+    {
+        
+        if(arr1[i]<arr2[j])
+        { 
+    arr3[mainIndex++]=arr1[i++];
+        }
+        else
+        { 
+        arr3[mainIndex++]=arr2[j++];
+        }
+        
+    }
+    
+    while(i<Index1)
+    { 
+               arr3[mainIndex++]=arr1[i++];
+    }
+    while(j<Index2)
+    {  
+        arr3[mainIndex++]=arr2[j++];
+    }
+    return arr3;
+    
+}
+    //Function to return a list of integers denoting the node 
+    //values of both the BST in a sorted order.
+    vector<int> merge(Node *root1, Node *root2)
+    {
+       //Your code here
+       vector<int> arr1;
+       vector<int> arr2;
+       inorder(root1,arr1);
+        inorder(root2,arr2);
+        return  inOrderMerge(arr1,arr2);
+      
+    }
+};
