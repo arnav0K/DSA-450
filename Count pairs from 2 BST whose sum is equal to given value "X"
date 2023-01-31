@@ -1,0 +1,44 @@
+class Solution
+{
+public:
+
+
+    void mapper(Node* node, unordered_map<int,int>&mp){
+        
+        if(node==NULL)return;
+        
+        mapper(node->left,mp);
+        mp[node->data]++;
+        mapper(node->right,mp);
+        
+        
+    }
+    
+    void solve(Node* node, unordered_map<int,int>&mp,int &cnt,int x){
+        
+        if(node==NULL)return;
+        
+        solve(node->left,mp,cnt,x);
+        
+        int val=x-(node->data);
+        if(mp.find(val)!=mp.end()){
+            cnt++;
+        }
+        solve(node->right,mp,cnt,x);
+        
+        
+    }
+
+    int countPairs(Node* root1, Node* root2, int x)
+    {
+        unordered_map<int,int>mp;
+        
+        mapper(root1,mp);
+        int cnt=0;
+        
+        solve(root2,mp,cnt,x);
+        
+        return cnt;
+        
+    }
+};
