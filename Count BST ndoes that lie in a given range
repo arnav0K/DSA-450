@@ -1,0 +1,28 @@
+class Solution{
+public:
+
+  void preorder(Node* root,int l,int r,int &cnt)
+  {
+      if(root==NULL)
+      {
+          return ;
+      }
+      
+      if(root->data<=r && root->data>=l)
+      {
+          cnt++;
+      }
+      preorder(root->left,l,r,cnt);
+      preorder(root->right,l,r,cnt);
+  }
+
+
+
+
+    int getCount(Node *root, int l, int h)
+    {
+      int cnt=0;  
+      preorder(root,l,h,cnt);
+      return cnt;
+    }
+};
