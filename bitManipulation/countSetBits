@@ -1,0 +1,21 @@
+int total_popcount(int n) {
+    int count = 0;
+    while (n) {
+        if (n & 1) count++;
+        n >>= 1;
+    }
+    return count;
+}
+
+// ----------------------------------------------------------------------------------------------------------------------- //
+
+// method 1
+// TC: O(N)
+int countSetBits(int n)
+{
+    int count = 0;
+    for (int i = 1;i <= n;i++) {
+        count += total_popcount(i);
+    }
+    return count;
+}
