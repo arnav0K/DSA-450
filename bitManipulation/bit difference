@@ -1,0 +1,8 @@
+ int countBitsFlip(int a, int b){
+        int val=a^b;
+        int c=0;
+        while(val){
+            if(val&1) c++;
+            val=val>>1;
+        }
+        return c;
