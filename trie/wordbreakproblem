@@ -1,0 +1,80 @@
+//User function template for C++
+
+
+
+struct trie{
+    struct trie* child[26];
+    bool isEnd;
+};
+struct trie* getNode(void){
+    struct trie* p=NULL;
+    
+    p=(struct trie *) malloc (sizeof(struct trie));
+    
+    
+    if(p){
+         for(int i=0;i<26;i++) p->child[i]=NULL;
+         p->isEnd=false;
+    }
+   
+    return p;
+}
+
+void insert(struct trie* root,string str){
+    struct trie* tmp=root;
+    for(int i=0;i<str.size();i++){
+        int idx=str[i]-'a';
+        if(tmp->child[idx]==NULL){
+            tmp->child[idx]=getNode();
+        }
+        tmp=tmp->child[idx];
+    }
+    tmp->isEnd=true;
+}
+
+bool search(struct trie* root,string str){
+    //cout<<str<<endl;
+    struct trie* tmp=root;
+    for(int i=0;i<str.size();i++){
+        int idx=str[i]-'a';
+        if(tmp->child[idx]==NULL){
+            return false;
+        }
+        tmp=tmp->child[idx];
+    }
+    return tmp->isEnd;
+}
+
+
+
+bool isFound(string word,struct trie* root){
+    int n=word.size();
+    if(n==0) return 1;
+    for(int i=1;i<n+1;i++){
+        if(search(root,word.substr(0,i)) && isFound(word.substr(i),root)) return 1;
+    }
+    return 0;
+}
+
+
+class Solution{
+    public:
+    // A : given string to search
+    // B : vector of available strings
+    
+    int wordBreak(string A, vector<string> &B) {
+        //code here
+        
+        
+        
+        struct trie* root=getNode();
+        for(int i=0;i<B.size();i++){
+            insert(root,B[i]);
+        }
+        
+       
+        
+       return isFound(A,root);
+        
+    }
+};
