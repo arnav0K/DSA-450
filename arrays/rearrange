@@ -1,0 +1,25 @@
+//User function template for C++
+class Solution{
+public:
+
+	void rearrange(int arr[], int n) {
+	    vector<int> P,N;
+        for(int i = n-1 ; i >=0 ; i--){
+            if(arr[i] >= 0)
+                P.push_back(arr[i]);
+            else
+                N.push_back(arr[i]);
+        }
+        int i = 0;
+        while(i < n){
+            if(!P.empty()){
+                arr[i++] = P.back();
+                P.pop_back();
+            }
+            if(!N.empty()){
+                arr[i++] = N.back();
+                N.pop_back();
+            }
+        }
+	}
+};
