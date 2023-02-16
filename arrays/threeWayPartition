@@ -1,0 +1,27 @@
+//User function template for C++
+
+class Solution{   
+public:
+    //Function to partition the array around the range such 
+    //that array is divided into three parts.
+    void threeWayPartition(vector<int>& arr,int a, int b)
+    {
+        // code here 
+       int n=arr.size();
+       int s=0,e=n-1;
+         int i=0;
+       while(i<=e){
+           if(arr[i]<a){
+               swap(arr[i],arr[s]);
+               s++;
+               i++;
+           }
+           else if(arr[i]>b){
+               swap(arr[i],arr[e]);
+               e--;
+           }
+           else i++;
+       }
+        
+    }
+};
