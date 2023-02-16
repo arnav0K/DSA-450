@@ -1,0 +1,20 @@
+class Solution{
+  public:
+
+    int smallestSubWithSum(int arr[], int n, int x)
+    {
+        int result =INT_MAX;
+        int curr = 0;
+        int i = 0 , j= 0;
+        while(i<n)
+        {
+            curr+=arr[i++];
+            while(curr>x)// find sum greater then x
+            {
+                result = min(result, i-j);// finding minimum size of sub array which some more then x
+                curr-=arr[j++];
+            }
+        }
+        return result;
+    }
+};
