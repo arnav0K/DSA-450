@@ -1,0 +1,41 @@
+// User function Template for C++
+class Solution {
+  public:
+   void solve(string str,string s, int i, int n, vector<string> &v)
+    {
+        if(i<n)
+        {
+            
+            s.push_back(str[i]);
+            v.push_back(s);
+            solve(str,s,i+1,n,v);
+            s.pop_back();
+            solve(str,s,i+1,n,v);
+        }
+       
+    }
+   bool isValid(string s)
+  {
+      int n = s.size();
+      if(s[n-1]=='a' || s[n-1]=='e' || s[n-1]=='i'|| s[n-1]=='o'|| s[n-1]=='u') return false;
+      if(s[0]!='a' && s[0]!='e' && s[0]!='i' && s[0]!='o' && s[0]!='u') return false;
+      return true;
+      
+  }
+  public:
+    set<string> allPossibleSubsequences(string S) {
+        vector<string> v;
+        string s;
+        solve(S,s,0,S.size(),v);
+        set<string> st;
+        for(int i=0;i<v.size();i++)
+        {   
+            if(isValid(v[i]))
+            {
+                st.insert(v[i]);
+            }
+        }
+        return st;
+    
+    }
+};
