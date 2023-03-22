@@ -1,0 +1,49 @@
+//class implemented
+/*
+struct Item{
+    int value;
+    int weight;
+};
+*/
+#include <utility>
+
+class Solution
+{
+    public:
+    //Function to get the maximum total value in the knapsack.
+    static bool cmp(pair<int, double> &a, pair<int, double> &b){
+        return ( a.second > b.second);
+    }
+    double fractionalKnapsack(int W, Item arr[], int n)
+    {
+        // Your code here
+        vector<pair<int,double>> Profit_per_unit;
+         for(int i = 0; i < n; i++){
+             pair<int,double> p (i,((double)arr[i].value / arr[i].weight));
+              Profit_per_unit.push_back(p);
+              
+              
+        }
+      
+        sort(Profit_per_unit.begin(),Profit_per_unit.end(), cmp); 
+        double profit = 0.00;
+        for(auto &i : Profit_per_unit){
+            if(W == 0){
+                continue;
+            } 
+            else if(arr[i.first].weight >= W ){
+                
+                profit += (double)i.second * W;
+                W = 0;
+                //cout<<"h1  "<<i.first<<endl;
+            }
+            else if (arr[i.first].weight < W ){
+                W = W - arr[i.first].weight;
+                profit += (double)arr[i.first].value;
+                //cout<<"h2   "<<i.first<<endl;
+            }
+       }
+        return profit;
+    }
+        
+};
