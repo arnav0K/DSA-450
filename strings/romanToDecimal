@@ -1,0 +1,25 @@
+int val(char c) {
+    if (c == 'M') return 1000;
+    if (c == 'D') return 500;
+    if (c == 'C') return 100;
+    if (c == 'L') return 50;
+    if (c == 'X') return 10;
+    if (c == 'V') return 5;
+    if (c == 'I') return 1;
+}
+int romanToDecimal(string& s) {
+    // code 
+    int m = s.size();
+    int ans = 0;
+
+    for (int i = m - 1;i >= 0;i--) {
+        if (i > 0 && val(s[i - 1]) < val(s[i])) {
+            ans += val(s[i]) - val(s[i - 1]);
+            i--;
+        }
+        else {
+            ans += val(s[i]);
+        }
+    }
+    return ans;
+}
