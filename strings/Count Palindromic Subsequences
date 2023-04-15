@@ -1,0 +1,30 @@
+public:
+    const long long int mod = 1000000007;
+    long long int add(long long int x, long long int y) {
+        return ((x % mod) + (y % mod)) % mod;
+    }
+    long long int sub(long long int x, long long int y) {
+        return ((x % mod) - (y % mod) + mod) % mod;
+    }
+    long long int func(int i, int j, string &str,vector<vector<int>>&dp){
+        if(i>j){
+            return 0;
+        }
+        if(i==j){
+            return 1;
+        }
+        if(dp[i][j]!=-1){
+            return dp[i][j];
+        }
+        else if(str[i]==str[j]){
+            return dp[i][j]=add(add(func(i+1, j, str,dp), func(i, j-1, str,dp)), 1);
+        }
+        else
+            return dp[i][j]=add(func(i+1, j, str,dp), sub(func(i, j-1, str,dp), func(i+1, j-1, str,dp)));
+    }
+    long long int  countPS(string str){
+       int n=str.size();
+       vector<vector<int>>dp(n+1,vector<int>(n+1,-1));
+       return func(0, n-1, str,dp);
+    }
+};
