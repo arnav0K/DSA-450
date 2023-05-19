@@ -1,0 +1,33 @@
+
+
+class Solution
+{
+    public:
+    void solve(int index,string str,int k, string &ans){
+          ans=max(ans,str);
+        if(k==0 or index==str.size()-1){
+        
+          return;
+        }
+        char ch=*max_element(ans.begin()+index,ans.end());
+        if(ch>str[index]){
+            for(int i=index+1;i<str.size();i++){
+                swap(str[i],str[index]);  //swapping with indexth position
+                solve(index+1,str,k-1,ans);  //calling for next index element by decrementing k
+                swap(str[i],str[index]);  //backtracking ,  so we are again arranging element to their previous position so that we can check for next iteration of i
+            }
+            
+        }
+        else{  // if greates element is already at respective position
+             solve(index+1,str,k,ans);    //then we will call for next 
+            }
+        
+    }
+    string findMaximumNum(string str, int k)
+    {
+       // code here.
+       string ans=""; // This will store the maximum answer for atmost k swap
+       solve(0,str,k,ans);   // we will start from first index
+       return ans;
+    }
+};
