@@ -1,0 +1,44 @@
+class Solution{
+public:
+    // Function to determine if graph can be coloured with at most M colours such
+    // that no two adjacent vertices of graph are coloured with same colour.
+    
+    bool canColor(int v,vector<int>&color,bool graph[101][101],int m,int n,int i){
+        for(int u=0;u<n;u++){
+            if(graph[v][u]==1 and color[u]==i)return false;
+        }
+        return true;
+        
+    }
+    
+    
+    bool solve(int v,bool graph[101][101],int m,int n,vector<int>&color){
+        
+        if(v==n)return true;
+        
+        for(int i=0;i<m;i++){
+            if(canColor(v,color,graph,m,n,i)){
+                color[v] = i;
+                if(solve(v+1,graph,m,n,color))return true;
+                color[v] = -1;
+            }
+        }
+        return false;
+        
+        
+    }
+    
+    bool graphColoring(bool graph[101][101], int m, int n) {
+        vector<int>color(n,-1);
+        if(solve(0,graph,m,n,color))return true;
+        return false;
+
+        
+        
+        
+        
+        // your code here
+    }
+};
+
+https://www.youtube.com/watch?v=wuVwUK25Rfc
