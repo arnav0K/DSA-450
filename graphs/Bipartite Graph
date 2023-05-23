@@ -1,0 +1,38 @@
+class Solution {
+    private :
+    
+    bool bfs(int src , int colour[] , vector<int>adj[]){
+        
+        queue<int>q;
+        q.push(src);
+        colour[src]=0;
+        while(!q.empty()){
+            int u = q.front();
+            q.pop();
+        
+        for(auto i : adj[u]){
+            
+            if(colour[i]==-1){
+                colour[i] = !colour[u];
+                q.push(i);
+            }else if(colour[i]==colour[u])return false;
+        }
+    }
+        return true;
+        
+    }
+public:
+	bool isBipartite(int V, vector<int>adj[]){
+	    // Code here
+	    int colour[V] ;
+	     for(int i = 0 ; i <V ; i++) colour[i]=-1;
+	    for(int i = 0 ; i <V ; i++){
+	        if(colour[i]==-1){
+	            if(!bfs(i,colour,adj))return false;
+	        }
+	    }
+	    
+	    return true;
+	}
+
+};
