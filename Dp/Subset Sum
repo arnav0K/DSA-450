@@ -1,0 +1,42 @@
+class Solution{
+public:
+    
+    // int dp[101][25001];
+    
+    int find(int n, int arr[], int sumReq, vector<vector<int>> &dp)
+    {
+        if(sumReq == 0)
+            return 1;
+        
+        if(n == 0)
+            return 0;
+        
+        if(dp[n][sumReq] != -1)
+            return dp[n][sumReq];
+        
+        if(sumReq >= arr[n - 1])
+            return  dp[n][sumReq] = (find(n - 1, arr, sumReq - arr[n - 1], dp) || find(n - 1, arr, sumReq, dp));
+        else
+            return  dp[n][sumReq] = find(n - 1, arr, sumReq, dp);
+    }
+
+    int equalPartition(int N, int arr[])
+    {
+        // code here
+        
+        int sum = 0;
+        
+        for(int i = 0 ; i < N; i++)
+            sum += arr[i];
+            
+        // memset(dp, -1, sizeof(dp));
+            
+        if(sum % 2 != 0)
+            return 0;
+        else
+        {
+            vector<vector<int>> dp(N + 1, vector<int>(sum, -1));
+            return find(N, arr, sum / 2, dp);
+        }
+        
+    }
