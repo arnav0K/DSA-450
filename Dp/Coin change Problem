@@ -1,0 +1,23 @@
+class Solution {
+  public:
+    long long int solve(int coins[], int ind, int sum,  vector<vector<long long int>> &dp){
+        if(ind == 0){
+            return (sum % coins[0] == 0);
+        }
+        
+        if(dp[ind][sum] != -1)  return dp[ind][sum];
+        long long int nottake = solve(coins, ind-1, sum, dp);
+        long long int take = 0;
+        if(coins[ind] <= sum){
+            take = solve(coins, ind, sum - coins[ind], dp);
+        }
+        return dp[ind][sum] = take + nottake;
+    }
+    
+    long long int count(int coins[], int N, int sum) {
+
+        // code here.
+        vector<vector<long long int>> dp(N, vector<long long int>(sum+1, -1));
+        return solve(coins, N-1, sum, dp);
+    }
+};
