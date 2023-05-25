@@ -1,0 +1,31 @@
+https://www.youtube.com/watch?v=tQU4rkmPyV0
+// User function Template for C++
+class Solution{
+public:
+int recur(int i,int j,vector<vector<int>>& M,int n,int m, vector<vector<int>>& dp){//maan lo ith row and jth column me h and abtk sum amt of gold paya,ab age{
+        //pruning 
+        if(i<0||i>=n) return 0;
+        if(j<0||j>=m) return 0;
+        //cache check
+        if(dp[i][j]!=-1) return dp[i][j];
+        //computing
+        int ans1 =recur(i,j+1,M,n,m,dp);
+        int ans2= recur(i-1,j+1,M,n,m,dp);
+        int ans3 =recur(i+1,j+1,M,n,m,dp);
+        return dp[i][j]=M[i][j]+max(ans1,max(ans2,ans3));
+        
+    }
+    int maxGold(int n, int m, vector<vector<int>> M)
+    {    vector<vector<int>> dp(n+1, vector<int>(m+1, -1));
+        // memset(dp,-1,sizeof(dp));
+        int max1 = 0;
+        for(int i=0;i<n;i++){
+            max1 = max(max1,recur(i,0,M,n,m,dp));
+        }
+        return max1;
+        
+    }
+
+
+
+};
