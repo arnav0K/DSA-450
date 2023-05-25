@@ -1,0 +1,34 @@
+https://www.youtube.com/watch?v=8HEjwf28LyE&t=1040s
+class Solution {
+  public:
+  
+    int recur(int i,int j,string &s,string &t,vector<vector<int>>&dp)
+    {
+        if(dp[i][j]!=-1)
+        {
+            return dp[i][j];
+        }
+        if(i==s.size())
+        {
+            return t.size()-j;
+        }
+        if(j==t.size())
+        {
+            return s.size()-i;
+        }
+        if(s[i]==t[j])
+        {
+            return dp[i][j]=recur(i+1,j+1,s,t,dp);
+        }
+        return dp[i][j]=1+min(recur(i+1,j+1,s,t,dp),min(recur(i+1,j,s,t,dp),recur(i,j+1,s,t,dp)));
+    }
+  
+  
+  
+    int editDistance(string s, string t) {
+        vector<vector<int>>dp(101,vector<int>(101,-1));
+        return recur(0,0,s,t,dp);
+        
+        // Code here
+    }
+};
