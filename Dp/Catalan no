@@ -1,0 +1,2 @@
++= catalan(i) * catalan(n - i - 1);
+see article
