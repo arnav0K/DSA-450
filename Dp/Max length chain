@@ -1,0 +1,27 @@
+/*
+The structure to use is as follows
+struct val{
+	int first;
+	int second;
+};*/
+
+class Solution{
+public:
+    static bool cmp(struct val a, struct val b){
+        return a.second<b.second;
+    }
+
+    int maxChainLen(struct val p[],int n){
+        //Your code here
+        sort(p,p+n,cmp);
+        int cnt=1;
+        int st=p[0].second;
+        for(int i=1;i<n;i++){
+            if(p[i].first>st){
+                cnt++;
+                st=p[i].second;
+            }
+        }
+        return cnt;
+    }
+};
