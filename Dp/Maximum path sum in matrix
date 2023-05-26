@@ -1,0 +1,32 @@
+// User function Template for C++
+
+class Solution{
+public:
+    
+    int helper(int i,int j,int n,vector<vector<int>>&matrix,vector<vector<int>>&dp){
+        if(i==n)return 0;
+        if(dp[i][j]!=-1)return dp[i][j];
+        
+        int a=0,b=0,c=0;
+        if(j-1>=0)
+        a=helper(i+1,j-1,n,matrix,dp);
+        if(j+1<n)
+        b=helper(i+1,j+1,n,matrix,dp);
+        
+        c=helper(i+1,j,n,matrix,dp);
+        
+        return dp[i][j] = matrix[i][j]+max(a,max(b,c));
+    }
+
+    int maximumPath(int N, vector<vector<int>> Matrix)
+    {
+        vector<vector<int>>dp(N,vector<int>(N,-1));
+        
+        int ans=0;
+        for(int i=0;i<N;i++){
+            ans=max(ans,helper(0,i,N,Matrix,dp));
+        }
+        
+        return ans;
+    }
+};
