@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+//Position this line where user code will be pasted.
+
+class Solution{
+	
+	int func(int cost[],int N,int W,int i,vector<vector<int>>&dp)
+	{
+	    if(W==0)
+	    {
+	        return 0;
+	    }
+	    
+	    if(i==N)
+	    {
+	        if(W==0)
+	        {
+	            return 0;
+	        }
+	        else
+	        {
+	            return 1e6;
+	        }
+	    }
+	    if(dp[i][W]!=-1)
+	    {
+	        return dp[i][W];
+	    }
+	    int x=INT_MAX,y=INT_MAX,z=INT_MAX;
+	    if(i+1<=W and cost[i]!=-1)
+	    {
+	      x=cost[i]+func(cost,N,W-(i+1),i,dp);
+	      z=func(cost,N,W,i+1,dp);
+	    }
+	    y=func(cost,N,W,i+1,dp);
+	    return dp[i][W]= min(x,min(y,z));
+	}
+
+	public:
+	int minimumCost(int cost[], int N, int W) 
+	{ 
+	    vector<vector<int>>dp(N+1,vector<int>(W+1,-1));
+        int y= func(cost,N,W,0,dp);
+        if(y==1e6)
+        {
+            return -1;
+        }
+        return y;
+	} 
+};
