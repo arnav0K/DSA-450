@@ -1,0 +1,27 @@
+// User function Template for C++
+
+class Solution{
+public:
+
+    int maxProf(int i, int w, int n, int val[], int wt[],vector<vector<int>> &dp)
+    {
+        if(w == 0 || i == n) return 0;
+        
+        if(w < 0 || i > n) return INT_MIN/10;
+        
+        if(dp[i][w] != -1) return dp[i][w];
+        
+        int pick = val[i] + maxProf(i, w - wt[i], n, val, wt, dp);
+        int notPick = maxProf(i + 1, w, n, val, wt, dp);
+        
+        return dp[i][w] = max(pick, notPick);
+    }
+
+    
+    int knapSack(int n, int w, int val[], int wt[])
+    {
+        vector<vector<int>> dp(n+5, vector<int>(w + 5, -1));
+        int res = maxProf(0, w, n, val, wt, dp);
+        return res < 0 ? 0 : res;
+    }
+};
