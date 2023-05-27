@@ -1,0 +1,35 @@
+https://www.youtube.com/watch?v=XtIGGdrF67E
+//User function template for C++
+
+// A : given string to search
+// B : vector of available strings
+
+
+class Solution
+{
+public:
+    int solve(string A,vector<string>&B){
+    if(A.length()==0){
+        return 1;
+    }
+     
+     for(string x:B){
+         string prefix = A.substr(0,x.length());
+         int result =0;
+         if(prefix==x){
+             result = solve(A.substr(x.length()),B);
+             if(result){
+                 return 1;
+             }
+             
+         }
+     }
+     return 0; 
+    }
+     
+    int wordBreak(string A, vector<string> &B) {
+        //code here
+        string ans ="";
+      return solve(A,B);
+    }
+};
