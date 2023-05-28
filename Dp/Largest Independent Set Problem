@@ -1,0 +1,13 @@
+int LISS(Node *root)
+{
+   if(root ==NULL) return 0;
+   int ex=LISS(root->left)+LISS(root->right);
+   int in =1;
+   if(root->left)
+   in+=LISS(root->left->left)+LISS(root->left->right);
+     if(root->right)
+   in+=LISS(root->right->left)+LISS(root->right->right);
+   
+   return max(in, ex);
+    //Code here
+}
