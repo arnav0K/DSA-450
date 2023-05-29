@@ -1,0 +1,17 @@
+Maximum Length of Pair Chain
+class Solution {
+public:
+	int f(int i,int prev,vector<vector<int>>& pairs,int n){
+		if(i==n) return 0;
+		int pick=INT_MIN;
+		if(prev==-1 || pairs[prev][1]<pairs[i][0])pick=1+f(i+1,i,pairs,n);
+		int notpick=f(i+1,prev,pairs,n);
+		return max(pick,notpick);
+	}
+
+	int findLongestChain(vector<vector<int>>& pairs) {
+		int n=pairs.size();
+		sort(pairs.begin(),pairs.end());
+		return f(0,-1,pairs,n);
+	}
+};
