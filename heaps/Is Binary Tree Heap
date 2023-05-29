@@ -1,0 +1,52 @@
+class Solution {
+    
+    private:
+    
+    int count_nodes(struct Node*root){
+        
+        if(root==NULL)return 0;
+        
+        return 1+count_nodes(root->left)+count_nodes(root->right);
+    }
+    
+    bool is_complete(struct Node*root, int totalcount, int i){
+        
+        if(root==NULL)return true;
+        
+        if(i>=totalcount)return false;
+        
+        return is_complete(root->left,totalcount,2*i+1) && is_complete(root->right,totalcount,2*i+2);
+        
+    }
+    
+    bool is_maxordered(struct Node*root){
+        
+        if(root->left==NULL && root->right==NULL)return true;
+        
+        if(root->right==NULL){
+            
+            return root->data > root->left->data;
+        }
+        else{
+            
+            bool left=is_maxordered(root->left);
+            bool right=is_maxordered(root->right);
+            
+            return (left && right && (root->data > root->left->data && root->data > root->right->data));
+        }
+    }
+    
+  public:
+    bool isHeap(struct Node* tree) {
+        // code here
+        
+        int totalcount=count_nodes(tree);
+        int count=0;
+        
+        if( is_complete(tree,totalcount,count) && is_maxordered(tree))return true;
+        
+        return false;
+        
+        
+    }
+};
