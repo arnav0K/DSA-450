@@ -1,0 +1,20 @@
+long long int maxSum(int arr[], int n)
+{
+    sort(arr,arr+n);
+   int i=0,j=n-1;
+   int ans=0;
+   while(i<j)
+   {
+       ans+=(arr[j]-arr[i]);
+       if(i+1<j)
+       {
+           ans+=(arr[j]-arr[i+1]);
+       }
+       else break;
+       i++;
+       j--;
+   }
+   ans+=arr[j]-arr[0];
+   return ans;
+    
+}
