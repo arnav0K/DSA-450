@@ -1,0 +1,29 @@
+//User function Template for C++
+class Solution{
+    public:
+    long long int findMaxProduct(vector<int>&a, int n){
+        //Write your code here  
+        long long m=1000000007;;
+        long long pro=1;
+        if(n==1) return a[0];
+        int neg=0,zero=0;
+        int maxneg=INT_MIN;
+        for(int i=0;i<n;i++){
+            if(a[i]==0){
+               zero++;
+               continue;
+            } 
+            else if(a[i]<0){
+                neg++;
+                maxneg=max(maxneg,a[i]);
+            }
+            pro=(pro*a[i])%m;
+        }
+        if(zero==n) return 0;
+        else if(zero==n-1 && neg==1) return 0;
+        else if(neg%2!=0){
+            pro/=maxneg;
+        }
+        return pro;
+    }
+};
