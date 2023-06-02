@@ -1,0 +1,18 @@
+https://www.youtube.com/watch?v=Wi25qZJojK4
+class Solution{
+	public:
+		vector<string> AllPossibleStrings(string s){
+		 int n=s.size();
+		    vector<string> ans;
+		    int k=1<<n;
+		    for(int i=1;i<k;i++){
+		        string temp="";
+		        for(int j=0;j<n;j++){
+		            if(i&(1<<j))temp+=s[j];
+		        }
+		        ans.push_back(temp);
+		    }
+		    sort(ans.begin(),ans.end());
+		    return ans;
+		}
+};
