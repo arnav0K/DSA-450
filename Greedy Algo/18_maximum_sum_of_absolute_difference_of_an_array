@@ -1,0 +1,42 @@
+Sort the array
+Initialize 2 variable i=0, j = size – 1
+Set a flag (true if we will increment i and false if we will decrement j) in order to track which variable needs to be changed. since after first move we will select next min value i.e. increment i, it will be initialised as true;
+Run the while loop and calculate sum for every i and j, and change i and j accordingly
+After the loop we need to calculate the difference of middle element and first. this will be done separately.
+Below is the implementation of the above approach:
+
+
+// CPP implementation of
+// above algorithm
+#include <bits/stdc++.h>
+using namespace std;
+ 
+long long int maxSum(int arr[], int n)
+{
+    sort(arr, arr + n);
+    int i = 0, j = n - 1;
+    bool off = true;
+    long long int sum = 0;
+    while (i < j) {
+        sum += abs(arr[i] - arr[j]);
+        if (!off) {
+            j--;
+        }
+        else {
+            i++;
+        }
+        off = !off;
+    }
+    sum += abs(arr[i] - arr[0]);
+    return sum;
+}
+// Driver function
+int main()
+{
+    int a[] = { 1, 2, 4, 8 };
+    int n = sizeof(a) / sizeof(a[0]);
+ 
+    cout << maxSum(a, n) << endl;
+}
+Output
+18
