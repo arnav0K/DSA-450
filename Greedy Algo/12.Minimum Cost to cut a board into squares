@@ -1,0 +1,75 @@
+At first sort both the array in non-ascending order
+We keep count of two variables vert(keeps track of vertical pieces) and hzntl(keeps track of horizontal pieces). We will initialize both of them with 1.
+We will keep track of two pointers starting from 0th  index of both the array 
+Now we will take the highest cost edge from those pointers and multiply them with the corresponding variable. That is if we cut a horizontal cut we will add (edge_cost*hzntl) and increase vert by 1 and if we cut a vertical cut we will add(edge_cost*vert) and increase hzntl bt 1 .
+After cutting all the edges we will get the minimum cost
+Below is the implementation of the above approach:
+
+
+//  C++ program to divide a board into m*n squares
+#include <bits/stdc++.h>
+using namespace std;
+ 
+// method returns minimum cost to break board into
+// m*n squares
+int minimumCostOfBreaking(int X[], int Y[], int m, int n)
+{
+    int res = 0;
+ 
+    //  sort the horizontal cost in reverse order
+    sort(X, X + m, greater<int>());
+ 
+    //  sort the vertical cost in reverse order
+    sort(Y, Y + n, greater<int>());
+ 
+    //  initialize current width as 1
+    int hzntl = 1, vert = 1;
+ 
+    //  loop until one or both cost array are processed
+    int i = 0, j = 0;
+    while (i < m && j < n)
+    {
+        if (X[i] > Y[j])
+        {
+            res += X[i] * vert;
+ 
+            //  increase current horizontal part count by 1
+            hzntl++;
+            i++;
+        }
+        else
+        {
+            res += Y[j] * hzntl;
+ 
+            //  increase current vertical part count by 1
+            vert++;
+            j++;
+        }
+    }
+ 
+    // loop for horizontal array, if remains
+    int total = 0;
+    while (i < m)
+        total += X[i++];
+    res += total * vert;
+ 
+    // loop for vertical array, if remains
+    total = 0;
+    while (j < n)
+        total += Y[j++];
+    res += total * hzntl;
+ 
+    return res;
+}
+ 
+//  Driver code to test above methods
+int main()
+{
+    int m = 6, n = 4;
+    int X[m-1] = {2, 1, 3, 1, 4};
+    int Y[n-1] = {4, 1, 2};
+    cout << minimumCostOfBreaking(X, Y, m-1, n-1);
+    return 0;
+}
+Output
+42
